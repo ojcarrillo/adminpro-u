@@ -3,3 +3,7 @@
 .nb {
     list-style-type: none;
 }
+
+#themecolors a {
+    cursor: pointer;
+}

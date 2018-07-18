@@ -10,13 +10,15 @@ import { SharedModule } from "../shared/shared.module";
 import { PAGES_ROUTES } from './pages.routes';
 
 import { ComponentsModule } from '../components/components.module';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 @NgModule({
     declarations: [
         PagesComponent,
         DashboardComponent,
         Graficas1Component,
-        ProgressComponent
+        ProgressComponent,
+        AccountSettingsComponent
     ],
     exports: [
         PagesComponent,

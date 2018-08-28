@@ -9,6 +9,7 @@ import { PageModule } from './pages/pages.module';
 
 import { APP_ROUTES } from './app.routes';
 import { ServiceModule } from './services/service.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { ServiceModule } from './services/service.module';
     BrowserModule,
     APP_ROUTES,
     PageModule,
-    ServiceModule
+    ServiceModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     

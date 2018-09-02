@@ -5,6 +5,7 @@ import { URL_SERVICIOS } from '../../config/config';
 
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,9 @@ export class UsuarioService {
   usuario: Usuario;
   token: string;
 
-  constructor(public http: HttpClient, public router: Router) {
+  constructor(public http: HttpClient,
+    public router: Router,
+    public _subirArchivo: SubirArchivoService) {
     this.cargarStorage();
   }
 
@@ -30,6 +33,15 @@ export class UsuarioService {
       this.token = '';
       this.usuario = null;
     }
+  }
+
+  guardarStorage(id: string, token: string, usuario: Usuario) {
+    localStorage.setItem('id', id);
+    localStorage.setItem('token', token);
+    localStorage.setItem('usuario', JSON.stringify(usuario));
+
+    this.usuario = usuario;
+    this.token = token;
   }
 
   crearUsuario(usuario: Usuario) {
@@ -55,14 +67,7 @@ export class UsuarioService {
     return this.http.post(url, usuario)
       .pipe(
         map((resp: any) => {
-
-          localStorage.setItem('id', resp.id);
-          localStorage.setItem('token', resp.token);
-          localStorage.setItem('usuario', JSON.stringify(resp.usuario));
-
-          this.usuario = usuario;
-          this.token = resp.token;
-
+          this.guardarStorage(resp.id, resp.token, resp.usuario);
           return true;
         })
       )
@@ -75,5 +80,28 @@ export class UsuarioService {
     localStorage.removeItem('usuario');
     localStorage.removeItem('id');
     this.router.navigate(['/login']);
+  }
+
+  actualizar(usuario: Usuario) {
+    console.log(usuario);
+    let url = URL_SERVICIOS + `/usuario/${usuario._id}`;
+    url += '?token=' + this.token;
+    return this.http.put(url, usuario)
+      .pipe(
+        map((resp: any) => {
+          this.guardarStorage(resp.usuario._id, this.token, resp.usuario);
+          swal('Usuario Actualiado', resp.usuario.nombre, 'success');
+          return true;
+        }))
+  }
+
+  cambiarImagen(archivo: File, id: string) {
+    this._subirArchivo.fileUpload(archivo, 'usuarios', id)
+      .subscribe((resp: any) => {
+        console.log(resp.usuario);
+        this.usuario.img = resp.usuario.img;
+        swal('Fotografía Actualizada correctamente', '', 'success');
+        this.guardarStorage(id, this.token, resp.usuario);
+      });
   }
 }

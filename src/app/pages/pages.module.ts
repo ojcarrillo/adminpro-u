@@ -13,6 +13,9 @@ import { ComponentsModule } from '../components/components.module';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PipesModule } from "../pipes/pipes.module";
+import { ProfileComponent } from './profile/profile.component';
+import { CommonModule } from "@angular/common";
 
 @NgModule({
     declarations: [
@@ -22,7 +25,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         ProgressComponent,
         AccountSettingsComponent,
         PromesasComponent,
-        RxjsComponent
+        RxjsComponent,
+        ProfileComponent
     ],
     exports: [
         PagesComponent,
@@ -31,10 +35,12 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         ProgressComponent
     ],
     imports: [
+        CommonModule,
         SharedModule,
         PAGES_ROUTES,
         FormsModule,
-        ComponentsModule
+        ComponentsModule,
+        PipesModule
     ]
 })
 export class PageModule { }

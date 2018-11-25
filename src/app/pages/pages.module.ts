@@ -17,6 +17,9 @@ import { PipesModule } from "../pipes/pipes.module";
 import { ProfileComponent } from './profile/profile.component';
 import { CommonModule } from "@angular/common";
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { HospitalesComponent } from './hospitales/hospitales.component';
+import { MedicosComponent } from './medicos/medicos.component';
+import { MedicoComponent } from './medicos/medico.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +31,10 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
         PromesasComponent,
         RxjsComponent,
         ProfileComponent,
-        UsuariosComponent
+        UsuariosComponent,
+        HospitalesComponent,
+        MedicoComponent,
+        MedicosComponent
     ],
     exports: [
         PagesComponent,

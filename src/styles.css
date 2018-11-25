@@ -24,6 +24,10 @@
     width: 25px;
 }
 
+.img-50 {
+    width: 50px;
+}
+
 .oculto {
     display: none;
 }

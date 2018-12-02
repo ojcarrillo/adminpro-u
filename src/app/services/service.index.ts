@@ -1,5 +1,6 @@
 export { SubirArchivoService } from './subir-archivo/subir-archivo.service';
 export { LoginGuardGuard } from './guard/login-guard.guard';
+export { AdminGuard } from './guard/admin.guard';
 
 export { UsuarioService } from './usuario/usuario.service';
 export { HospitalService } from './hospital/hospital.service';
